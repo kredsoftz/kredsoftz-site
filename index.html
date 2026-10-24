@@ -161,5 +161,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <span><a href="https://careers.kredsoftz.in">careers.kredsoftz.in</a></span>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+<div class="scrollnav" aria-label="Page scroll">
+  <button type="button" id="toTop" aria-label="Scroll to top" title="Top">&#9650;</button>
+  <button type="button" id="toBottom" aria-label="Scroll to bottom" title="Bottom">&#9660;</button>
+</div>
+<style>
+.scrollnav{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;z-index:20}
+.scrollnav button{width:44px;height:44px;border-radius:50%;border:2px solid #E3A922;background:#0A3A2A;color:#F5D46A;font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35);transition:opacity .2s,transform .2s}
+.scrollnav button:hover{transform:translateY(-2px)}
+.scrollnav button:focus-visible{outline:3px solid #F5D46A;outline-offset:2px}
+.scrollnav button.hide{opacity:0;pointer-events:none}
+</style>
+<script>
+(function(){
+  var up=document.getElementById('toTop'),dn=document.getElementById('toBottom');
+  function upd(){var y=window.scrollY,max=document.documentElement.scrollHeight-window.innerHeight;
+    up.classList.toggle('hide',y<300);dn.classList.toggle('hide',y>max-300);}
+  up.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  dn.addEventListener('click',function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'})});
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+})();
+</script>
 </body>
 </html>
